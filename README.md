@@ -8,7 +8,7 @@ I'll also add on specific packages and their usage here, mostly so I don't forge
 ```bash
 git clone --recursive git@github.com:jcaguirre89/vimconfig.git\
 # Create symlinks so vim can find config files and packages
-ln -sf vimconfig ~/.vim
+ln -sf vimconfig/.vim ~/.vim
 ln -sf vimconfig/vimrc ~/.vimrc
 ```
 
