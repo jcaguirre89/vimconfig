@@ -19,7 +19,7 @@ sudo apt install pylint
 [Instructions here](https://github.com/Valloric/YouCompleteMe#linux-64-bit)
 
 ## Tagbar
-Install ctags: `sudo apt-get install ctags`
+Install ctags: `sudo apt install ctags`
 
 I mapped `<F11>` to the create tags command (`ctags -R .`) for virtual environments, and `<leader>b` to see the TagBar.
 
