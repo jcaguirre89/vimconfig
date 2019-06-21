@@ -1,8 +1,5 @@
 # VIM Configuration
-my `.vimrc` and `.vim` folder with packages (just a reference for now, maybe with submodules later).
-
-I'll also add on specific packages and their usage here, mostly so I don't forget later.
-
+my `.vimrc` and `.vim` folder with packages as submodules.
 # Usage
 
 ```bash
