@@ -48,6 +48,13 @@ set list
 set showbreak=\\ 
 set listchars=eol:$,trail:.,extends:>,precedes:<,tab:│·,nbsp:~
 
+" Any File default
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set textwidth=119
+set fileformat=unix
+
 au BufNewFile,BufRead *.py 
     \ set tabstop=4 |
     \ set softtabstop=4 |
@@ -150,6 +157,7 @@ let b:ale_fixers = ['yapf']
 " Disable warnings about trailing whitespace for Python files.
 let b:ale_warn_about_trailing_whitespace = 0
 let g:ale_python_flake8_options = '--max-line-length=120'
+let g:ale_python_pylint_options = '--max-line-length=120'
 " Bind F8 to fixing
 nmap <F8> <Plug>(ale_fix)
 " This is currently not working as far as I know
