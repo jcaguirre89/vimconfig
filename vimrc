@@ -151,7 +151,11 @@ nnoremap <leader>g :Gstatus<CR>
 
 " ALE (linting) config
 " Check Python files with flake8 and pylint.
-let b:ale_linters = ['flake8', 'pylint', 'mypy']
+"let b:ale_linters = ['flake8', 'pylint', 'mypy', 'eslint']
+let g:ale_linters = {
+\   'python': ['flake8', 'pylint', 'mypy'],
+\   'javascript': ['eslint'],
+\}
 " Fix Python files with autopep8 and yapf.
 let b:ale_fixers = ['yapf']
 " Disable warnings about trailing whitespace for Python files.
@@ -173,7 +177,12 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 " CtrlP configs
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" ag is fast enough that CtrlP doesn't need to cache
+let g:ctrlp_use_caching = 0
 " Ignore these files/dirs
+" This apparently doesn't work when ctrlp_user_command is used. add these to the .agignore file instead
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 
@@ -282,7 +291,7 @@ let g:ctrlsf_winsize = '25%'
 " Emmet config
 let g:user_emmet_leader_key=','
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,css,javascript,javascript.jsx EmmetInstall
 
 " Plugins need to be added to runtimepath before helptags can be generated.
 packloadall

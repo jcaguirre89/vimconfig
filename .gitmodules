@@ -34,3 +34,9 @@
 [submodule ".vim/pack/dist/start/tagbar"]
 	path = .vim/pack/dist/start/tagbar
 	url = git@github.com:majutsushi/tagbar.git
+[submodule "vim-prettier"]
+	path = vim-prettier
+	url = git@github.com:prettier/vim-prettier.git
+[submodule ".vim/pack/dist/start/vim-prettier"]
+	path = .vim/pack/dist/start/vim-prettier
+	url = git@github.com:prettier/vim-prettier.git
