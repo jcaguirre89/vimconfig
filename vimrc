@@ -48,6 +48,15 @@ set list
 set showbreak=\\ 
 set listchars=eol:$,trail:.,extends:>,precedes:<,tab:│·,nbsp:~
 
+" File formats and config for each type and default
+" Default
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set textwidth=119
+set fileformat=unix
+
+" Python
 au BufNewFile,BufRead *.py 
     \ set tabstop=4 |
     \ set softtabstop=4 |
@@ -59,6 +68,7 @@ au BufNewFile,BufRead *.py
     \ set smartindent |
     \ set fileformat=unix
 
+" Web
 au BufNewFile,BufRead *.js,*.html,*.css 
     \ set tabstop=2 |
     \ set softtabstop=2 |
