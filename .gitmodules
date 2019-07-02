@@ -40,3 +40,12 @@
 [submodule ".vim/pack/dist/start/vim-prettier"]
 	path = .vim/pack/dist/start/vim-prettier
 	url = git@github.com:prettier/vim-prettier.git
+[submodule ".vim/pack/dist/start/vim-javascript"]
+	path = .vim/pack/dist/start/vim-javascript
+	url = git@github.com:pangloss/vim-javascript.git
+[submodule ".vim/pack/dist/start/vim-json"]
+	path = .vim/pack/dist/start/vim-json
+	url = git@github.com:elzr/vim-json.git
+[submodule ".vim/pack/dist/start/vim-jsx"]
+	path = .vim/pack/dist/start/vim-jsx
+	url = https://github.com/mxw/vim-jsx
