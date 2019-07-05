@@ -49,3 +49,9 @@
 [submodule ".vim/pack/dist/start/vim-jsx"]
 	path = .vim/pack/dist/start/vim-jsx
 	url = https://github.com/mxw/vim-jsx
+[submodule "awesome-vim-colorschemes"]
+	path = awesome-vim-colorschemes
+	url = git@github.com:rafi/awesome-vim-colorschemes.git
+[submodule ".vim/pack/dist/start/awesome-vim-colorschemes"]
+	path = .vim/pack/dist/start/awesome-vim-colorschemes
+	url = git@github.com:rafi/awesome-vim-colorschemes.git

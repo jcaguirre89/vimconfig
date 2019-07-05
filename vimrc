@@ -97,10 +97,11 @@ map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " color palette config
-let g:gruvbox_italic=1
+"let g:gruvbox_italic=1
 set termguicolors
-set background=dark
-colorscheme gruvbox
+"set background=dark
+let ayucolor="mirage"
+colorscheme ayu
 
 " Airline config
 let g:airline#extensions#tabline#enabled                      = 1
