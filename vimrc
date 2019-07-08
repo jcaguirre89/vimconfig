@@ -3,8 +3,10 @@
 let python_highlight_all=1
 syntax on
 set encoding=utf-8
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-"set nu
+
+" Draw a rule at column 100
+set colorcolumn=100
+
 " Hybrid line numbering
 set number relativenumber
 " Switch line numbering depending on focus
@@ -102,6 +104,8 @@ au BufNewFile,BufRead *.js,*.html,*.css
 "	set fileformat=unix
 "endfunction
 
+" NerdTree config
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
