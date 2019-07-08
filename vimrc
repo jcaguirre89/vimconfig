@@ -4,7 +4,16 @@ let python_highlight_all=1
 syntax on
 set encoding=utf-8
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-set nu
+"set nu
+" Hybrid line numbering
+set number relativenumber
+" Switch line numbering depending on focus
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END
+
 set autoindent
 au FileType python setlocal formatprg=autopep8\ -
 
