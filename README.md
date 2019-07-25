@@ -8,7 +8,9 @@ git clone --recursive git@github.com:jcaguirre89/vimconfig.git
 ln -sf vimconfig/.vim ~/.vim
 ln -sf vimconfig/vimrc ~/.vimrc
 ln -sf vimconfig/zshrc ~/.zshrc
+ln -sf vimconfig/agnoster.zsh-theme ~/.oh-my-zsh/themes/agnoster.zsh-theme 
 ```
+
 
 ## vim-flake8 and ALE
 Must install pylint:
