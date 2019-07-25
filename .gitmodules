@@ -56,3 +56,9 @@
 [submodule ".vim/pack/dist/start/awesome-vim-colorschemes"]
 	path = .vim/pack/dist/start/awesome-vim-colorschemes
 	url = git@github.com:rafi/awesome-vim-colorschemes.git
+[submodule "rainbow_parentheses.vim"]
+	path = rainbow_parentheses.vim
+	url = git@github.com:junegunn/rainbow_parentheses.vim.git
+[submodule ".vim/pack/dist/start/rainbow_parentheses.vim"]
+	path = .vim/pack/dist/start/rainbow_parentheses.vim
+	url = git@github.com:junegunn/rainbow_parentheses.vim.git

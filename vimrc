@@ -120,6 +120,8 @@ set termguicolors
 let ayucolor="mirage"
 colorscheme ayu
 
+highlight Comment cterm=italic gui=italic
+
 " Airline config
 let g:airline#extensions#tabline#enabled                      = 1
 let g:airline#extensions#tabline#buffer_min_count             = 1
@@ -180,6 +182,7 @@ let g:ale_linters = {
 " Fix Python files with autopep8 and yapf.
 let g:ale_fixers = {
 \    'python': ['yapf'],
+\   'javascript': ['eslint'],
 \}
 " Disable warnings about trailing whitespace for Python files.
 let b:ale_warn_about_trailing_whitespace = 0
@@ -303,11 +306,11 @@ let g:tagbar_sort = 0
 
 "Ctrl S F mappings 
 " Open search box
-nmap <C-F>f <Plug>CtrlSFPrompt
+nmap <leader>ff <Plug>CtrlSFPrompt
 " Search for word under cursor
-nmap <C-F>c <Plug>CtrlSFCwordExec
+nmap <leader>fc <Plug>CtrlSFCwordExec
 " Search for words selected in visual mode
-vmap <C-F>c <Plug>CtrlSFVwordExec
+vmap <leader>fc <Plug>CtrlSFVwordExec
 " Window size
 let g:ctrlsf_winsize = '25%'
 
@@ -377,6 +380,14 @@ function! SaveAndExecutePython()
     setlocal readonly
     setlocal nomodifiable
 endfunction
+
+
+" Rainbow Parentheses config
+" Activation based on file type
+augroup rainbow_web
+  autocmd!
+  autocmd FileType javascript,javascript.jsx,html,css RainbowParentheses
+augroup END
 
 " Plugins need to be added to runtimepath before helptags can be generated.
 packloadall
