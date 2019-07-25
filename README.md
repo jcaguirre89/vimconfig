@@ -1,5 +1,5 @@
 # VIM Configuration
-my `.vimrc` and `.vim` folder with packages as submodules.
+my `.vimrc` and `.vim` folder with packages as submodules. Also included my zsh configs (.zshrc and customized agnoster theme) for convenience.
 # Usage
 
 ```bash
@@ -7,6 +7,7 @@ git clone --recursive git@github.com:jcaguirre89/vimconfig.git
 # Create symlinks so vim can find config files and packages
 ln -sf vimconfig/.vim ~/.vim
 ln -sf vimconfig/vimrc ~/.vimrc
+ln -sf vimconfig/zshrc ~/.zshrc
 ```
 
 ## vim-flake8 and ALE
