@@ -62,3 +62,6 @@
 [submodule ".vim/pack/dist/start/rainbow_parentheses.vim"]
 	path = .vim/pack/dist/start/rainbow_parentheses.vim
 	url = git@github.com:junegunn/rainbow_parentheses.vim.git
+[submodule ".vim/pack/dist/start/ayu-vim"]
+	path = .vim/pack/dist/start/ayu-vim
+	url = git@github.com:ayu-theme/ayu-vim.git
