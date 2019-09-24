@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/caguirre/.oh-my-zsh"
+export ZSH="/home/crist/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -69,7 +69,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions python zsh-syntax-highlighting)
+plugins=(git extract zsh-autosuggestions python zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,7 +101,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Set up dircolors
 #solarized
-eval `dircolors ~/dircolors/solarized-dircolors`
+eval `dircolors ~/.dircolors`
 #nord-dircolors
 #eval `dircolors ~/dircolors/nord-dircolors`
 
@@ -115,11 +115,11 @@ alias jupyter-notebook="~/.local/bin/jupyter-notebook --no-browser"
 export WORKON_HOME=$HOME/.Envs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export VIRTUALENV_PYTHON=/usr/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV=$HOME/.local/bin/virtualenv
 source $HOME/.local/bin/virtualenvwrapper.sh
 
 # Alias to windows home
-alias home="/mnt/c/Users/user/"
+alias home="/mnt/c/Users/crist/"
 
 # Alias to open visual studio code and blackhole its output
 alias c.="code . > /dev/null"
@@ -140,3 +140,9 @@ compdef _files start
 
 # Add local bin to path
 export PATH="$HOME/bin:$HOME/.local/bin:/usr/bin:$PATH"
+
+# Alias EXA to ls
+alias ls="exa"
+alias la="exa -a"
+alias ll="exa --header --long --git"
+alias lt="exa --tree --long"

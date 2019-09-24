@@ -181,7 +181,7 @@ let g:ale_linters = {
 \}
 " Fix Python files with autopep8 and yapf.
 let g:ale_fixers = {
-\    'python': ['yapf'],
+\    'python': ['black'],
 \   'javascript': ['eslint'],
 \}
 " Disable warnings about trailing whitespace for Python files.
