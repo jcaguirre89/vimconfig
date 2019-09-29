@@ -146,3 +146,103 @@ alias ls="exa"
 alias la="exa -a"
 alias ll="exa --header --long --git"
 alias lt="exa --tree --long"
+
+# git automation
+function gac() {
+    git add .
+    if [ "$1" != "" ]
+    then
+        git commit -m "$1"
+    else
+        git commit -m update # default commit message is `update`
+    fi # closing statement of if-else block
+}
+
+alias gp="git push origin HEAD"
+function gap() {
+    if [ "$1" != "" ]
+		then
+			gac "$1" && gp
+		else
+			gac && gp
+		fi
+}
+
+# Use bat for man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# fd
+export FD_OPTIONS="--follow --exclude .git --exclude node_modules"
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='git ls-files --cached --others --exclude-standard | fd --type file --follow --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --multi --inline-info --border --preview="[[ \$(file --mime {}) =~ binary ]] && echo
+{} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -300"
+--preview-window="right:45%:wrap" '
+
+# f mv # To move files. You can write the destination after selecting the files.
+# f 'echo Selected:'
+# f 'echo Selected music:' --extention mp3
+# fm rm # To rm files in current directory
+f() {
+    sels=( "${(@f)$(fd "${fd_default[@]}" "${@:2}"| fzf)}" )
+    test -n "$sels" && print -z -- "$1 ${sels[@]:q:q}"
+}
+
+# Like f, but not recursive.
+fm() f "$@" --max-depth 1
+# Deps
+alias fz="fzf-noempty --bind 'tab:toggle,shift-tab:toggle+beginning-of-line+kill-line,ctrl-j:toggle+beginning-of-line+kill-line,ctrl-t:top' --color=light -1 -m"
+fzf-noempty () {
+	local in="$(</dev/stdin)"
+	test -z "$in" && (
+		exit 130
+	) || {
+		ec "$in" | fzf "$@"
+	}
+}
+ec () {
+	if [[ -n $ZSH_VERSION ]]
+	then
+		print -r -- "$@"
+	else
+		echo -E -- "$@"
+	fi
+}
+
+# fuzzy grep open via ag with line number
+# Searches for file content and opens file with match
+vg() {
+  local file
+  local line
+
+  read -r file line <<<"$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1, $2}')"
+
+  if [[ -n $file ]]
+  then
+     vim $file +$line
+  fi
+}
+
+# cd to selected directory
+cdf() {
+ local dir
+ dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d \
+      -print 2> /dev/null | fzf +m) &&
+ cd "$dir"
+}
+
+# cd into the directory of the selected file
+fdf() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
+# find-in-file - usage: fif <searchTerm>
+fif() {
+  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+}
