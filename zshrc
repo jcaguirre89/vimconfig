@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/caguirre/.oh-my-zsh"
+export ZSH="/home/crist/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -69,7 +69,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions python zsh-syntax-highlighting)
+plugins=(git extract zsh-autosuggestions python zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,7 +101,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Set up dircolors
 #solarized
-eval `dircolors ~/dircolors/solarized-dircolors`
+eval `dircolors ~/.dircolors`
 #nord-dircolors
 #eval `dircolors ~/dircolors/nord-dircolors`
 
@@ -115,11 +115,11 @@ alias jupyter-notebook="~/.local/bin/jupyter-notebook --no-browser"
 export WORKON_HOME=$HOME/.Envs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export VIRTUALENV_PYTHON=/usr/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV=$HOME/.local/bin/virtualenv
 source $HOME/.local/bin/virtualenvwrapper.sh
 
 # Alias to windows home
-alias home="/mnt/c/Users/user/"
+alias home="/mnt/c/Users/crist/"
 
 # Alias to open visual studio code and blackhole its output
 alias c.="code . > /dev/null"
@@ -140,3 +140,109 @@ compdef _files start
 
 # Add local bin to path
 export PATH="$HOME/bin:$HOME/.local/bin:/usr/bin:$PATH"
+
+# Alias EXA to ls
+alias ls="exa"
+alias la="exa -a"
+alias ll="exa --header --long --git"
+alias lt="exa --tree --long"
+
+# git automation
+function gac() {
+    git add .
+    if [ "$1" != "" ]
+    then
+        git commit -m "$1"
+    else
+        git commit -m update # default commit message is `update`
+    fi # closing statement of if-else block
+}
+
+alias gp="git push origin HEAD"
+function gap() {
+    if [ "$1" != "" ]
+		then
+			gac "$1" && gp
+		else
+			gac && gp
+		fi
+}
+
+# Use bat for man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# fd
+export FD_OPTIONS="--follow --exclude .git --exclude node_modules"
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='git ls-files --cached --others --exclude-standard | fd --type file --follow --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --multi --inline-info --border --preview="[[ \$(file --mime {}) =~ binary ]] && echo
+{} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -300"
+--preview-window="right:45%:wrap" '
+
+# f mv # To move files. You can write the destination after selecting the files.
+# f 'echo Selected:'
+# f 'echo Selected music:' --extention mp3
+# fm rm # To rm files in current directory
+f() {
+    sels=( "${(@f)$(fd "${fd_default[@]}" "${@:2}"| fzf)}" )
+    test -n "$sels" && print -z -- "$1 ${sels[@]:q:q}"
+}
+
+# Like f, but not recursive.
+fm() f "$@" --max-depth 1
+# Deps
+alias fz="fzf-noempty --bind 'tab:toggle,shift-tab:toggle+beginning-of-line+kill-line,ctrl-j:toggle+beginning-of-line+kill-line,ctrl-t:top' --color=light -1 -m"
+fzf-noempty () {
+	local in="$(</dev/stdin)"
+	test -z "$in" && (
+		exit 130
+	) || {
+		ec "$in" | fzf "$@"
+	}
+}
+ec () {
+	if [[ -n $ZSH_VERSION ]]
+	then
+		print -r -- "$@"
+	else
+		echo -E -- "$@"
+	fi
+}
+
+# fuzzy grep open via ag with line number
+# Searches for file content and opens file with match
+vg() {
+  local file
+  local line
+
+  read -r file line <<<"$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1, $2}')"
+
+  if [[ -n $file ]]
+  then
+     vim $file +$line
+  fi
+}
+
+# cd to selected directory
+cdf() {
+ local dir
+ dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d \
+      -print 2> /dev/null | fzf +m) &&
+ cd "$dir"
+}
+
+# cd into the directory of the selected file
+fdf() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
+# find-in-file - usage: fif <searchTerm>
+fif() {
+  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+}
