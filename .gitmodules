@@ -65,3 +65,9 @@
 [submodule ".vim/pack/dist/start/ayu-vim"]
 	path = .vim/pack/dist/start/ayu-vim
 	url = git@github.com:ayu-theme/ayu-vim.git
+[submodule ".vim/pack/dist/start/vim-surround"]
+	path = .vim/pack/dist/start/vim-surround
+	url = git@github.com:tpope/vim-surround.git
+[submodule ".vim/pack/dist/start/vim-repeat"]
+	path = .vim/pack/dist/start/vim-repeat
+	url = git@github.com:tpope/vim-repeat.git
