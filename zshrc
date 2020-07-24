@@ -176,7 +176,8 @@ export FD_OPTIONS="--follow --exclude .git --exclude node_modules"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='git ls-files --cached --others --exclude-standard | fd --type file --follow --hidden --exclude .git'
+export FZF_DEFAULT_COMMAND='git ls-files --cached --others --exclude-standard | fd --type file --follow --hidden
+--exclude .git --exclude node_modules'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --multi --inline-info --border --preview="[[ \$(file --mime {}) =~ binary ]] && echo
 {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -300"
@@ -246,3 +247,7 @@ fif() {
   if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
   rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
 }
+
+# Display WSL2 IP address
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+sudo /etc/init.d/dbus start &> /dev/null
